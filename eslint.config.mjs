@@ -1,14 +1,19 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
 
-
-/** @type {import('eslint').Linter.Config[]} */
 export default [
-  {files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]},
-  {languageOptions: { globals: globals.browser }},
+  {
+    languageOptions: { globals: globals.node },
+    rules: {
+      // Indentation rule: 2 spaces
+      indent: ["error", 2],
+      // Space before function parenthesis
+      "space-before-function-paren": ["error", "always"],
+      // No space inside parentheses
+      "space-in-parens": ["error", "never"],
+    },
+  },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
 ];
